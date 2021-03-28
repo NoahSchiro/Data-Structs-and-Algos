@@ -138,6 +138,70 @@ class singlyLinkedList {
                 tail -> nextNode = nullptr;
             }
         }
+
+        void deleteNode(int information) {
+
+            //Executes if the list is not empty
+            if (head != nullptr) {
+
+                //Executes only when the list has one element and 
+                //that element contains the information we want to delete
+                if (head == tail && information == head -> data) {
+                    
+                    delete head;
+                    
+                    head = tail = nullptr;
+                
+                //Executes if the head contains the data we want to delete
+                } else if (information == head -> data) {
+                    
+                    SLLnode* temp = head;
+                    
+                    head = head -> nextNode;
+
+                    delete temp;
+                
+                } else {
+
+                    //Dummy nodes
+                    SLLnode* pred;
+                    SLLnode* temp;
+
+                    //Loops through the list in a convoluted way
+                    for (pred = head, temp = head -> nextNode; 
+                         temp != nullptr && !(temp -> data == information);
+                         pred = pred -> nextNode, temp = temp -> nextNode) {
+
+                        //If this if statement fails, it means we have reached the end of the list and we can break out
+                        if (temp != nullptr) {
+
+                            pred -> nextNode = temp -> nextNode;
+
+                            //If we are at the end, reset tail so that it equals pred
+                            if (temp == tail) {
+
+                                tail = pred;
+
+                            }
+
+                            //Delete the last temp
+                            delete temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        bool isInList(int information) {
+
+            SLLnode* temp;
+
+            //Loop through linked list while temp is not at the end of the list and while it is not equal to the value we are trying to find
+            for(temp = head; temp != nullptr && !(temp -> data == information); temp = temp -> nextNode);
+
+            //If this returns true then it means that we found the data
+            return temp != nullptr;
+        }
 };
 
 #endif

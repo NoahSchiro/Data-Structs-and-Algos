@@ -23,22 +23,16 @@ class SLLnode {
 };
 
 class singlyLinkedList {
-
-    //First item in list
-    SLLnode* head;
-    //Last item in list
-    SLLnode* tail;
-
     public:
+
+        //First item in list
+        SLLnode* head;
+        //Last item in list
+        SLLnode* tail;
 
         //Constructor
         singlyLinkedList() {
             head = tail = nullptr;
-        }
-
-        //Returns whether the list is empty 
-        bool isEmpty() {
-            return head == 0;
         }
 
         //Decontructor
@@ -47,7 +41,7 @@ class singlyLinkedList {
             //Loop through all nodes as long as 
             //the list is not empty, delete each 
             //node and move to the next node
-            for(SLLnode *p; !isEmpty; ) {
+            for(SLLnode *p; !(head == nullptr); ) {
                 p = head -> nextNode;
                 delete head;
                 head = p;
@@ -128,7 +122,7 @@ class singlyLinkedList {
                 SLLnode* temp;
 
                 //Increment to the second to last node
-                for(temp = head; temp != tail; temp = temp -> nextNode);
+                for(temp = head; temp -> nextNode != tail; temp = temp -> nextNode);
 
                 //Get rid of the tail
                 delete tail;
@@ -137,6 +131,8 @@ class singlyLinkedList {
                 //Make sure that it points to something (nothing lol)
                 tail -> nextNode = nullptr;
             }
+
+            return information;
         }
 
         void deleteNode(int information) {
@@ -170,23 +166,22 @@ class singlyLinkedList {
                     //Loops through the list in a convoluted way
                     for (pred = head, temp = head -> nextNode; 
                          temp != nullptr && !(temp -> data == information);
-                         pred = pred -> nextNode, temp = temp -> nextNode) {
+                         pred = pred -> nextNode, temp = temp -> nextNode);
 
-                        //If this if statement fails, it means we have reached the end of the list and we can break out
-                        if (temp != nullptr) {
+                    //If this if statement fails, it means we have reached the end of the list and we can break out
+                    if (temp != nullptr) {
 
-                            pred -> nextNode = temp -> nextNode;
+                        pred -> nextNode = temp -> nextNode;
 
-                            //If we are at the end, reset tail so that it equals pred
-                            if (temp == tail) {
+                        //If we are at the end, reset tail so that it equals pred
+                        if (temp == tail) {
 
-                                tail = pred;
+                            tail = pred;
 
-                            }
-
-                            //Delete the last temp
-                            delete temp;
                         }
+
+                        //Delete the last temp
+                        delete temp;
                     }
                 }
             }

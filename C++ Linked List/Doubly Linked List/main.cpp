@@ -14,4 +14,9 @@ int main() {
     for(temp = list.head; temp != nullptr; temp = temp -> nextNode) {
         std::cout << temp -> data << "\n";
     }
+
+    DLLnode* te = nullptr;
+    for(te = list.tail; te != nullptr; te = te -> prevNode) {
+        std::cout << temp -> data << "\n";
+    }
 }

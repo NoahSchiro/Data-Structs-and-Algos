@@ -71,31 +71,33 @@ class graph {
 
     void deleteNode(node input);
     
+    //Adds a connection between two nodes in the graph
     void addConnection(node one, node two) {
 
         //Determines if these nodes are even in the graph
         if(inGraph(one) && inGraph(two)) {
 
             //Find where they are in our allNodes vector
-            int onePosition, twoPosition;
+            int posOne, posTwo;
             for(int i = 0; i < allNodes.size(); i++) {
                 if(one.location[0] == allNodes[i].location[0] && one.location[1] == allNodes[i].location[1]) {
-                    onePosition = i;
+                    posOne = i;
                 }
 
                 if(two.location[0] == allNodes[i].location[0] && two.location[1] == allNodes[i].location[1]) {
-                    twoPosition = i;
+                    posTwo = i;
                 }
             }
 
-            adjMat[onePosition][twoPosition] = 1;
-            adjMat[twoPosition][onePosition] = 1;
+            adjMat[posOne][posTwo] = 1;
+            adjMat[posTwo][posOne] = 1;
         }
         
     }
 
     void deleteConnection(node one, node two);
 
+    //Prints out the VALUES of each of the nodes in the graph
     void showNodes(){
 
         for(int i = 0; i < allNodes.size(); i++) {
@@ -104,6 +106,7 @@ class graph {
         }
     }
 
+    //Prints out the adjency matrix
     void showMatrix() {
 
         for(int i = 0; i < adjMat.size(); i++) {
